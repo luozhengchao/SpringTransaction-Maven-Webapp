@@ -25,12 +25,12 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	</bean>
 
 <!-- 配置业务层 -->	
-	<bean id="accountService" class="transactionManagement3.AccountServiceImpl">
+	<bean id="accountService" class="transactionManagement4.AccountServiceImpl">
 		<property name="accountDao" ref="accountDao" />
 	</bean>
 
 <!-- 配置dao层 -->	
-	<bean id="accountDao" class="transactionManagement3.AccountDaoImpl">
+	<bean id="accountDao" class="transactionManagement4.AccountDaoImpl">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
@@ -39,15 +39,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-<!-- 配置事务通知  事物的增强-->
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="upMoney"/>
-		</tx:attributes>
-	</tx:advice>
-	
-<!-- 配置aop切面 -->
-	<aop:config>
-		<aop:advisor advice-ref="txAdvice" pointcut="execution(* transactionManagement3.AccountService.upMoney(..))"/>
-	</aop:config>
+<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

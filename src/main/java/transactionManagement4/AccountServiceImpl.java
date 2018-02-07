@@ -1,5 +1,8 @@
-package transactionManagement3;
+package transactionManagement4;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 public class AccountServiceImpl implements AccountService {
 
 	private AccountDao accountDao;
@@ -7,7 +10,7 @@ public class AccountServiceImpl implements AccountService {
 		this.accountDao = accountDao;
 	}
 
-	public void upMoney(String in, String out, double money) {
+	public void up(String in, String out, double money) {
 		accountDao.del(out, money);
 		accountDao.add(in, money);
 	}
