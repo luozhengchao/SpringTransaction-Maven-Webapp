@@ -48,6 +48,9 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 <!-- 配置aop切面 -->
 	<aop:config>
-		<aop:advisor advice-ref="txAdvice" pointcut="execution(* transactionManagement3.AccountService.upMoney(..))"/>
+		<!-- 切入点表达式 -->
+		<aop:pointcut expression="execution(* transactionManagement3.AccountService.*(..))" id="myPointcut"/>
+		<!-- 配置事务增强 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
 	</aop:config>
 </beans>
